@@ -1,6 +1,8 @@
 #!/usr/bin/python3
+import datetime, uuid
+from models.engine.file_storage import FileStorage
 
-import datetime, uuid, storage
+storage = FileStorage()
 
 class BaseModel():
 
