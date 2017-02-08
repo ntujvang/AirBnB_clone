@@ -16,12 +16,15 @@ class FileStorage:
     __file_path = 'hbnb.json'
     __objects = {}
 
+    def __init__(self):
+        self.reload()
+
     def all(self):
         '''This is the 'all' instance
 
         Return: __objects
         '''
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         '''This is the 'new' instance.
@@ -30,7 +33,7 @@ class FileStorage:
         @obj: object
         Return: ####fill me in #####
         '''
-        self.__objects[obj.id] = obj
+        FileStorage.__objects[obj.id] = obj.__dict__
 
     def save(self):
         '''This is the 'save' instance.
@@ -38,8 +41,8 @@ class FileStorage:
 
         Return: JSON file
         '''
-        with open(self.__file_path, 'w+', encoding='utf-8') as fn:
-            fn.write(self.to_json())
+        with open(FileStorage.__file_path, 'w+', encoding='utf-8') as fn:
+            fn.write(json.dumps(FileStorage.__objects))
 
     def reload(self):
         '''This is the 'reload' instance.
@@ -48,8 +51,8 @@ class FileStorage:
 
         Return: __object or nothing
         '''
-        if os.path.isfile(self.__file_path) is True:
-            with open(self.__file_path, 'w+', encoding='utf-8') as fn:
-                self.__objects = json.load(fn)
+        if os.path.isfile(FileStorage.__file_path) is True:
+            with open(FileStorage.__file_path, 'w+', encoding='utf-8') as fn:
+                FileStorage.__objects = json.load(fn)
         else:
             pass
