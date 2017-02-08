@@ -16,22 +16,22 @@ class FileStorage:
     def __init__(self, file_path='', objects={}):
         '''This is the initialization of FileStorage.
         '''
-        self.file_path = file_path
-        self.objects = objects
+        self.__file_path = file_path
+        self.__objects = objects
 
-    @property
-    def file_path(self):
-        '''This is the getter for file_path.
-        '''
-        return self.__file_path
+   # @property
+   # def file_path(self):
+    #    '''This is the getter for file_path.
+    #    '''
+    #    return self.__file_path
 
     #@file_path.setter
 
-    @property
-    def objects(self):
-        '''This is the getter for objects.
-        '''
-        return self.__objects
+   # @property
+   # def objects(self):
+    #    '''This is the getter for objects.
+     #   '''
+      #  return self.__objects
 
     #@objects.setter
 
@@ -67,4 +67,5 @@ class FileStorage:
 
         Return: __object or nothing
         '''
-        return json.load(self.__file_path)
+        with open(self.__file_path, mode='a') as fn:
+            return json.load(fn)
