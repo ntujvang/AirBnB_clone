@@ -11,12 +11,16 @@ class BaseModel():
 
     def save(self):
         self.updated_at = datetime.datetime.utcnow()
+        storage.save(self)
 
     def to_json(self):
-        my_dict = self.__dict__
-        for x in my_dict.keys():
-            if (isinstance(my_dict[x], datetime)):
-                my_dict[x] = str(my_dict[x])
+        if type(self.args) is dict:
+            my_dict = self.__dict__
+            for x in my_dict.keys():
+                if (isinstance(my_dict[x], datetime)):
+                    my_dict[x] = str(my_dict[x])
+        else:
+            my_dict = storage.new(self)
         my_dict['__class__'] = type(self).__name__
         return my_dict
 

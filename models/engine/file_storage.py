@@ -13,27 +13,11 @@ import json
 class FileStorage:
     '''This is the FileStorage class.
     '''
-    def __init__(self, file_path='', objects={}):
+    def __init__(self, file_path="", objects={}):
         '''This is the initialization of FileStorage.
         '''
         self.__file_path = file_path
         self.__objects = objects
-
-   # @property
-   # def file_path(self):
-    #    '''This is the getter for file_path.
-    #    '''
-    #    return self.__file_path
-
-    #@file_path.setter
-
-   # @property
-   # def objects(self):
-    #    '''This is the getter for objects.
-     #   '''
-      #  return self.__objects
-
-    #@objects.setter
 
     def all(self):
         '''This is the 'all' instance
