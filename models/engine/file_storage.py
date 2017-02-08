@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+import json, os
+
 '''
 This is the file_storage module.
 
@@ -8,16 +10,11 @@ objects; and four instances: all, new, save, reload.
 '''
 
 
-import json
-
 class FileStorage:
     '''This is the FileStorage class.
     '''
-    def __init__(self):
-        '''This is the initialization of FileStorage.
-        '''
-        self.__file_path = "hbnb.json"
-        self.__objects = {}
+    __file_path = 'hbnb.json'
+    __objects = {}
 
     def all(self):
         '''This is the 'all' instance
@@ -34,7 +31,6 @@ class FileStorage:
         Return: ####fill me in #####
         '''
         self.__objects[obj.id] = obj
-        return self.__objects
 
     def save(self):
         '''This is the 'save' instance.
@@ -42,8 +38,8 @@ class FileStorage:
 
         Return: JSON file
         '''
-        with open(self.__file_path, mode="r+", encoding='utf-8') as fn:
-            fn.write(json.dumps(self.__objects))
+        with open(self.__file_path, 'w+', encoding='utf-8') as fn:
+            fn.write(self.to_json())
 
     def reload(self):
         '''This is the 'reload' instance.
@@ -52,5 +48,8 @@ class FileStorage:
 
         Return: __object or nothing
         '''
-        with open(self.__file_path, mode='r+', encoding='utf-8') as fn:
-            self.__objects = json.loads(fn.read())
+        if os.path.isfile(self.__file_path) is True:
+            with open(self.__file_path, 'w+', encoding='utf-8') as fn:
+                self.__objects = json.load(fn)
+        else:
+            pass
