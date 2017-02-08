@@ -16,7 +16,7 @@ class FileStorage:
     def __init__(self):
         '''This is the initialization of FileStorage.
         '''
-        self.__file_path = ""
+        self.__file_path = "hbnb.json"
         self.__objects = {}
 
     def all(self):
@@ -42,7 +42,8 @@ class FileStorage:
 
         Return: JSON file
         '''
-        return json.dump(self.__objects, self.__file_path)
+        with open(self.__file_path, mode="r+", encoding='utf-8') as fn:
+            fn.write(json.dumps(self.__objects))
 
     def reload(self):
         '''This is the 'reload' instance.
@@ -51,5 +52,5 @@ class FileStorage:
 
         Return: __object or nothing
         '''
-        with open(self.__file_path, mode='a') as fn:
-            return json.load(fn)
+        with open(self.__file_path, mode='r+', encoding='utf-8') as fn:
+            self.__objects = json.loads(fn.read())
