@@ -25,9 +25,7 @@ class FileStorage:
         '''
         return self.__file_path
 
-    @file_path.setter
-    '''file_path setter function.
-    '''
+    #@file_path.setter
 
     @property
     def objects(self):
@@ -35,9 +33,7 @@ class FileStorage:
         '''
         return self.__objects
 
-    @objects.setter
-    '''objects setter function
-    '''
+    #@objects.setter
 
     def all(self):
         '''This is the 'all' instance
