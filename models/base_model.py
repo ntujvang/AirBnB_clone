@@ -20,7 +20,7 @@ class BaseModel():
                 if (isinstance(my_dict[x], datetime)):
                     my_dict[x] = str(my_dict[x])
         else:
-            my_dict = storage.new(self)
+            my_dict = storage.new(self, args)
         my_dict['__class__'] = type(self).__name__
         return my_dict
 
