@@ -1,11 +1,12 @@
 #!/usr/bin/python3
-import json, os
+import json
+import os
 
 '''
 This is the file_storage module.
 
-file_storage contains one class: FileStorage; two private attributes: file_path,
-objects; and four instances: all, new, save, reload.
+file_storage contains one class: FileStorage; two private attributes:
+file_path, objects; and four instances: all, new, save, reload.
 
 '''
 
@@ -52,7 +53,7 @@ class FileStorage:
         Return: __object or nothing
         '''
         if os.path.isfile(FileStorage.__file_path) is True:
-            with open(FileStorage.__file_path, 'w+', encoding='utf-8') as fn:
+            with open(FileStorage.__file_path, 'r+', encoding='utf-8') as fn:
                 FileStorage.__objects = json.load(fn)
         else:
             pass
