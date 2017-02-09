@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 from base_model import BaseModel
-
-
 '''
 This is the 'user' module.
 
@@ -18,6 +16,7 @@ class User(BaseModel):
         '''This is the initialization function.
         initializes User with class attributes set to empty strings.
         '''
+        super(User, self).__init__()
         self.email = ''
         self.password = ''
         self.first_name = ''
