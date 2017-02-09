@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import json
 import os
-from models import *
+
 '''
 This is the file_storage module.
 
@@ -17,9 +17,6 @@ class FileStorage:
     __file_path = 'hbnb.json'
     __objects = {}
 
-    def __init__(self):
-        self.reload()
-
     def all(self):
         '''This is the 'all' instance
 
@@ -32,9 +29,8 @@ class FileStorage:
         Sets __object as @obj with key obj.id
 
         @obj: object
-        Return: ####fill me in #####
         '''
-        FileStorage.__objects[obj.id] = obj.__dict__
+        FileStorage.__objects[obj.id] = obj
 
     def save(self):
         '''This is the 'save' instance.
@@ -42,8 +38,11 @@ class FileStorage:
 
         Return: JSON file
         '''
-        with open(FileStorage.__file_path, 'w+', encoding='utf-8') as fn:
-            fn.write(json.dumps(FileStorage.__objects))
+        new_dict = {} #serialized
+        for key in self.__objects.keys():
+            new_dict[key] = self.__objects[key].to_json()
+        with open(self.__file_path, 'w+', encoding='utf-8') as fn:
+            json.dump(new_dict, fn)
 
     def reload(self):
         '''This is the 'reload' instance.
@@ -52,8 +51,12 @@ class FileStorage:
 
         Return: __object or nothing
         '''
-        if os.path.isfile(FileStorage.__file_path):
-            with open(FileStorage.__file_path, 'r+', encoding='utf-8') as fn:
-                FileStorage.__objects = json.load(fn)
+        from models.base_model import BaseModel
+        if os.path.isfile(self.__file_path) is True:
+            with open(self.__file_path, 'r+', encoding='utf-8') as fn:
+
+                obj = json.load(fn)
+                for key in obj.keys():
+                    FileStorage.__objects[key] = BaseModel(obj[key])
         else:
             pass
