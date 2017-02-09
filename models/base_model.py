@@ -1,8 +1,7 @@
 #!/usr/bin/python3
-import datetime
+from datetime import datetime, date, time
 import uuid
-from models.engine.file_storage import FileStorage
-storage = FileStorage()
+import models
 '''
 This is the 'base_model' module.
 
@@ -19,27 +18,26 @@ class BaseModel():
         '''This is the initialization method.
         This method sets three attributes: 'id', 'created_at', 'updated_at'
         '''
-        self.id = str(uuid.uuid4())
-        self.created_at = str(datetime.datetime.utcnow())
-        self.updated_at = str(datetime.datetime.utcnow())
-        for x in args:
-            if type(x) is dict:
-                self.__dict__ = x
-                sotrage.new(x)
-            else:
-                if kwargs is not {}:
-                    for key, value in kwargs:
-                        self.key = value
-                    storage.new(self)
+        try:
+            if type(args[0]) is dict:
+                self.__dict__ = arg[0]
+                self.__dict__['created_at'] = datetime.strptime(
+                    (self.__dict__['created_at']),"%Y-%m-%d %H:%M:%S.%f")
+                self.__dict__['updated_at'] = datetime.strptime(
+                    (self.__dict__['updated_at']),"%Y-%m-%d %H:%M:%S.%f")
+        except:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.created_at = datetime.now()
+            models.storage.new(self)
 
     def save(self):
         '''This is the save method.
         save updates the updated_at attribute with current date and time.
         save calls on the FileStorage class to save new instances of BaseModel.
         '''
-        self.updated_at = str(datetime.datetime.utcnow())
-        storage.new(self)
-        storage.save()
+        self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_json(self):
         '''This is the to_json method.
@@ -47,16 +45,22 @@ class BaseModel():
 
         Returns: dictionary
         '''
-        my_dict = self.__dict__.copy()
-        my_dict['__class__'] = str(type(self).__name__)
-        return my_dict
+        my_dict = self.__dict__
+        new_dict = {}
+        for i in my_dict.keys():
+            if (isinstance(my_dict[i], datetime)):
+                new_dict[i] = str(my_dict[i])
+            else:
+                new_dict[i] = my_dict[i]
+        new_dict['__class__'] = self.__class__.__name__
+        return new_dict
 
     def __str__(self):
         '''This is the string method.
 
         Returns: formatted string to print
         '''
-        class_name = type(self).__name__
+        class_name = self.__class__.__name__
         id_string = self.id
         my_dict = self.__dict__
         return ("[{}] ({}) {}".format(class_name, id_string, my_dict))
