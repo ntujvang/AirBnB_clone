@@ -54,7 +54,6 @@ class FileStorage:
         from models.base_model import BaseModel
         if os.path.isfile(FileStorage.__file_path) is True:
             with open(FileStorage.__file_path, 'r+', encoding='utf-8') as fn:
-
                 obj = json.load(fn)
                 for key in obj.keys():
                     FileStorage.__objects[key] = BaseModel(obj[key])
