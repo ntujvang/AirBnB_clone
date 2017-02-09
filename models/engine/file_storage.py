@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import json
 import os
-
+from models import *
 '''
 This is the file_storage module.
 
