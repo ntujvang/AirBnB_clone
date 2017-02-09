@@ -29,14 +29,16 @@ class hbnb(cmd.Cmd):
         based on the class name and id'
         if (len(arg.split()) == 0):
             print('** class name is missing **')
-        elif 'BaseModel' not in arg:
+        elif 'BaseModel' not in arg: #fix, shouldn't be hardcoded
             print('** class doesn''t exist **')
         elif (len(arg.split()) < 2):
             print('** instance id missing **')
-        elif arg.split()[1] != self.obj.__class__.__name__: #not working correctly
+        elif arg.split()[1] not in self.obj:
             print('** no instance found **')
         else:
-            print(self.obj) #not sure if this is working
+            print(self.obj[arg.split()[1]]) #not sure if this is working
 
+    def do_destroy(self, arg):
+        'Deletes an instance based on the class name and id, saves to JSON file'
 if __name__ == '__main__':
     hbnb().cmdloop()
