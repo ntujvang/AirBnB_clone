@@ -48,7 +48,7 @@ class BaseModel():
         Returns: dictionary
         '''
         my_dict = self.__dict__.copy()
-        my_dict['__class__'] = type(self).__name__
+        my_dict['__class__'] = str(type(self).__name__)
         return my_dict
 
     def __str__(self):
@@ -58,4 +58,5 @@ class BaseModel():
         '''
         class_name = type(self).__name__
         id_string = self.id
-        return ("[{}] ({}) {}".format(class_name, id_string, self.__dict__))
+        my_dict = self.__dict__
+        return ("[{}] ({}) {}".format(class_name, id_string, my_dict))

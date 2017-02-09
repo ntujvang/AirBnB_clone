@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import json
 import os
-
+from models import *
 '''
 This is the file_storage module.
 
@@ -52,7 +52,7 @@ class FileStorage:
 
         Return: __object or nothing
         '''
-        if os.path.isfile(FileStorage.__file_path) is True:
+        if os.path.isfile(FileStorage.__file_path):
             with open(FileStorage.__file_path, 'r+', encoding='utf-8') as fn:
                 FileStorage.__objects = json.load(fn)
         else:
