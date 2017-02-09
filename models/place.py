@@ -1,6 +1,9 @@
 '''
+This is the 'place' module.
 
+place contains the class 'Place', which is a sub-class of BaseModel.
 '''
+from models.base_model import BaseModel
 
 
 class Place(BaseModel):
