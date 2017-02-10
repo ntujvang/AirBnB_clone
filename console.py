@@ -11,7 +11,7 @@ class hbnb(cmd.Cmd):
     """
     prompt = '(hbnb) '
     obj = models.storage.all()
-    file = None #maybe remove
+    file = None  # maybe remove
 
     def do_quit(self, arg):
         '''Quit command to exit the program'''
@@ -38,7 +38,7 @@ class hbnb(cmd.Cmd):
                     new = models.BaseModel()
                 if args[0] == 'Amenity':
                     new = models.Amenity()
-                if args [0] == 'City':
+                if args[0] == 'City':
                     new = models.City()
                 if args[0] == 'Place':
                     new = models.Place()
@@ -77,7 +77,8 @@ class hbnb(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_destroy(self, arg):
-        '''Deletes an instance based on the class name and id, saves to JSON file'''
+        '''Deletes an instance based on the class name and id,'''\
+            '''saves to JSON file'''
         new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
                      'State', 'User']
         args = arg.split()
@@ -100,7 +101,8 @@ class hbnb(cmd.Cmd):
                 print('** class doesn''t exist **')
 
     def do_all(self, arg):
-        """Prints string representation of all instances based or not on the class name."""
+        """Prints string representation of all instances based,"""\
+            """ or not, on the class name."""
         new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
                      'State', 'User']
         our_list = []
@@ -115,8 +117,8 @@ class hbnb(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_update(self, arg):
-        'Updates an instance based on the class name and id ' \
-        'by adding or updating attribute, saves to JSON file'
+        '''Updates an instance based on the class name and id'''\
+            '''by adding or updating attribute, saves to JSON file'''
         new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
                      'State', 'User']
         args = arg.split()
