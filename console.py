@@ -2,7 +2,7 @@
 import cmd
 import sys
 import models
-"""Console module for holberton bnb data management
+"""Console module for Holberton bnb data management
 """
 
 
@@ -14,83 +14,134 @@ class hbnb(cmd.Cmd):
     file = None #maybe remove
 
     def do_quit(self, arg):
-        'Quit command to exit the program'
+        '''Quit command to exit the program'''
         return True
 
     def do_EOF(self, arg):
-        'Exits the program'
+        '''Exits the program'''
         return True
 
     def emptyline(self):
-        'Prevents repeat of previous input'
+        '''Prevents repeat of previous input'''
         pass
 
     def do_create(self, arg):
-        'Creates a new instance of BaseModel, save to JSON file'
-        if 'BaseModel' in arg:
-            new = models.BaseModel()
-            print('{}'.format(new.id))
+        '''Creates a new instance of BaseModel, save to JSON file'''
+        args = arg.split()
+        new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
+                     'State', 'User']
+        if len(args) < 1:
+            print('** class name missing **')
+        else:
+            if args[0] in new_class:
+                if args[0] == 'BaseModel':
+                    new = models.BaseModel()
+                if args[0] == 'Amenity':
+                    new = models.Amenity()
+                if args [0] == 'City':
+                    new = models.City()
+                if args[0] == 'Place':
+                    new = models.Place()
+                if args[0] == 'Review':
+                    new = models.Review()
+                if args[0] == 'State':
+                    new = models.State()
+                if args[0] == 'User':
+                    new = models.User()
+                new.save()
+                print('{}'.format(new.id))
 
     def do_show(self, arg):
-        'Prints the string representation of an instance' \
-        ' based on the class name and id'
-        if (len(arg.split()) == 0):
-            print('** class name is missing **')
-        elif 'BaseModel' not in arg: #fix, shouldn't be hardcoded
-            print('** class doesn''t exist **')
-        elif (len(arg.split()) < 2):
+        """Prints the string representation of an instance
+        based on the class name and id"""
+        new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
+                     'State', 'User']
+        args = arg.split()
+
+        if (len(args) < 2):
             print('** instance id missing **')
-        elif arg.split()[1] not in self.obj:
-            print('** no instance found **')
+        elif (len(args) == 0):
+            print('** class name is missing **')
         else:
-            print(self.obj[arg.split()[1]])
+            if args[0] in new_class:
+                models.storage.reload()
+                new_dict = models.storage.all()
+                if args[1] not in new_dict:
+                    print('** no instance found **')
+                for key in new_dict:
+                    if args[0] in str(new_dict[key]):
+                        if args[1] in new_dict.keys():
+                            print(new_dict[args[1]])
+                            break
+            else:
+                print("** class doesn't exist **")
 
     def do_destroy(self, arg):
-        'Deletes an instance based on the class name and id, saves to JSON file'
-        if (len(arg.split()) == 0):
+        '''Deletes an instance based on the class name and id, saves to JSON file'''
+        new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
+                     'State', 'User']
+        args = arg.split()
+
+        if len(args) == 0:
             print('** class name is missing **')
-        elif 'BaseModel' not in arg: #fix, shouldn't be hard coded
-            print('** class doesn''t exist **')
-        elif (len(arg.split()) < 2):
-            print('** instance id missing **')
-        elif arg.split()[1] not in self.obj:
-            print('** no instance found **')
         else:
-            del self.obj[arg.split()[1]]
-            models.storage.save()
+            if args[0] in new_class:
+                models.storage.reload()
+                new_dict = models.storage.all()
+                if args[1] in new_dict.keys():
+                    if args[0] in str(new_dict[args[1]]):
+                        del new_dict[args[1]]
+                        models.storage.save()
+                    else:
+                        print('** no instance found **')
+                else:
+                    print('** instance id missing **')
+            else:
+                print('** class doesn''t exist **')
 
     def do_all(self, arg):
-        'Prints all string representation of all instances' \
-        'based or not on the class name.'
-        if 'BaseModel' not in arg: #fix, shouldn't be hard coded
-            print('** class doesn''t exist **')
-        else:
-            ourlist = []
-            for i in self.obj.keys():
-                if self.obj[i].__class__.__name__ == arg:
-                    ourlist.append(str(self.obj[i]))
-                else:
-                    outlist.append(str(self.obj[i]))
-            print(ourlist)
+        """Prints string representation of all instances based or not on the class name."""
+        new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
+                     'State', 'User']
+        our_list = []
+        args = arg.split()
+
+        if len(args) > 0:
+            if args[0] in new_class:
+                for i in self.obj.keys():
+                    our_list.append(str(self.obj[i]))
+                print(our_list)
+            else:
+                print("** class doesn't exist **")
 
     def do_update(self, arg):
         'Updates an instance based on the class name and id ' \
         'by adding or updating attribute, saves to JSON file'
-        if (len(arg.split()) == 0):
+        new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
+                     'State', 'User']
+        args = arg.split()
+
+        if len(args) == 0:
             print('** class name is missing **')
-        elif 'BaseModel' not in arg: #fix, shouldn't be hard coded
-            print('** class doesn''t exist **')
-        elif (len(arg.split()) < 2):
+        elif len(args) < 2:
             print('** instance id missing **')
-        elif arg.split()[1] not in self.obj:
-            print('** no instance found **')
-        elif (len(arg.split()) < 4):
+        elif len(args) < 4:
             print('** value missing **')
+        elif args[1] not in self.obj:
+            print('** no instance found **')
         else:
-            clsname = arg.split()[2]
-            clsvalue = arg.split()[3]
-            (self.obj[arg.split()[1]]).__dict__[clsname] = clsvalue
-            models.storage.save()
+            class_name = args[0]
+            user_id = args[1]
+            attribute_name = args[2]
+            attribute_value = args[3].replace('\"', '')
+            models.storage.reload()
+            new_dict = models.storage.all()
+            if class_name in new_class:
+                obj = new_dict[user_id]
+                obj.attribute_name = attribute_value
+                models.storage.save()
+            else:
+                print('** class doesn''t exist **')
 
 if __name__ == '__main__':
     hbnb().cmdloop()
