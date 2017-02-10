@@ -1,7 +1,13 @@
 #!/usr/bin/python3
 import json
 import os
-from models import *
+from models.base_model import BaseModel
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 '''
 This is the file_storage module.
 
@@ -51,11 +57,9 @@ class FileStorage:
 
         Return: __object or nothing
         '''
-        from models.base_model import BaseModel
         if os.path.isfile(FileStorage.__file_path) is True:
             with open(FileStorage.__file_path, 'r+', encoding='utf-8') as fn:
                 obj = json.load(fn)
-"""
             for key in obj.keys():
                 is_dict = obj[key]
                 is_class = is_dict['__class__']
@@ -73,4 +77,3 @@ class FileStorage:
                     FileStorage.__objects[key] = State(obj[key])
                 if 'User' in is_class:
                     FileStorage.__objects[key] = User(obj[key])
-"""
