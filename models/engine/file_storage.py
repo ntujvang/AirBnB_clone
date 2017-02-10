@@ -1,13 +1,7 @@
 #!/usr/bin/python3
 import json
 import os
-from models.base_model import BaseModel
-from models.amenity import Amenity
-from models.city import City
-from models.place import Place
-from models.review import Review
-from models.state import State
-from models.user import User
+import models
 '''
 This is the file_storage module.
 
@@ -64,16 +58,16 @@ class FileStorage:
                 is_dict = obj[key]
                 is_class = is_dict['__class__']
                 if 'BaseModel' in is_class:
-                    FileStorage.__objects[key] = BaseModel(obj[key])
+                    FileStorage.__objects[key] = models.BaseModel(obj[key])
                 if 'Amenity' in is_class:
-                    FileStorage.__objects[key] = Amenity(obj[key])
+                    FileStorage.__objects[key] = models.Amenity(obj[key])
                 if 'City' in is_class:
-                    FileStorage.__objects[key] = City(obj[key])
+                    FileStorage.__objects[key] = models.City(obj[key])
                 if 'Place' in is_class:
-                    FileStorage.__objects[key] = Place(obj[key])
+                    FileStorage.__objects[key] = models.Place(obj[key])
                 if 'Review' in is_class:
-                    FileStorage.__objects[key] = Review(obj[key])
+                    FileStorage.__objects[key] = models.Review(obj[key])
                 if 'State' in is_class:
-                    FileStorage.__objects[key] = State(obj[key])
+                    FileStorage.__objects[key] = models.State(obj[key])
                 if 'User' in is_class:
-                    FileStorage.__objects[key] = User(obj[key])
+                    FileStorage.__objects[key] = models.User(obj[key])
