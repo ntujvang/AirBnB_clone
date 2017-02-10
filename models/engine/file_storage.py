@@ -38,7 +38,7 @@ class FileStorage:
 
         Return: JSON file
         '''
-        new_dict = {} #serialized
+        new_dict = {}
         for key in FileStorage.__objects.keys():
             new_dict[key] = FileStorage.__objects[key].to_json()
         with open(FileStorage.__file_path, 'w+', encoding='utf-8') as fn:
@@ -55,7 +55,20 @@ class FileStorage:
         if os.path.isfile(FileStorage.__file_path) is True:
             with open(FileStorage.__file_path, 'r+', encoding='utf-8') as fn:
                 obj = json.load(fn)
-                for key in obj.keys():
+            for key in obj.keys():
+                is_dict = obj[key]
+                is_class = is_dict['__class__']
+                if 'BaseModel' in is_class:
                     FileStorage.__objects[key] = BaseModel(obj[key])
-        else:
-            pass
+                if 'Amenity' in is_class:
+                    FileStorage.__objects[key] = Amenity(obj[key])
+                if 'City' in is_class:
+                    FileStorage.__objects[key] = City(obj[key])
+                if 'Place' in is_class:
+                    FileStorage.__objects[key] = Place(obj[key])
+                if 'Review' in is_class:
+                    FileStorage.__objects[key] = Review(obj[key])
+                if 'State' in is_class:
+                    FileStorage.__objects[key] = State(obj[key])
+                if 'User' in is_class:
+                    FileStorage.__objects[key] = User(obj[key])
