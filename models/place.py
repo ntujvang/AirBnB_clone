@@ -16,11 +16,7 @@ class Place(BaseModel):
     def __init__(self, *args, **kwargs):
         '''This is the initialization method.
         '''
-        if type(args[0]) is dict:
-            super().__init__(args[0])
-        else:
-            super().__init__()
-
+        super().__init__(*args, **kwargs)
         self.city_id = ''
         self.user_id = ''
         self.name = ''
