@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+from models.base_model import BaseModel
 '''
 This is the 'state' module.
 
@@ -11,7 +12,7 @@ class State(BaseModel):
 
     State contains one public attribute, 'name'.
     '''
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         '''This is the initialization function.
         '''
         self.name = ''
