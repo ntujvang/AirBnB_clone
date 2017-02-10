@@ -112,7 +112,8 @@ class hbnb(cmd.Cmd):
         if len(args) > 0:
             if args[0] in new_class:
                 for i in self.obj.keys():
-                    our_list.append(str(self.obj[i]))
+                    if self.obj[i].__class__.__name__ == args[0]:
+                        our_list.append(str(self.obj[i]))
                 print(our_list)
             else:
                 print("** class doesn't exist **")
