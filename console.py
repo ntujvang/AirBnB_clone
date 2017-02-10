@@ -58,10 +58,12 @@ class hbnb(cmd.Cmd):
                      'State', 'User']
         args = arg.split()
 
-        if (len(args) < 2):
-            print('** instance id missing **')
-        elif (len(args) == 0):
+        if (len(args) == 0):
             print('** class name is missing **')
+        elif args[0] not in new_class:
+            print('** class doesn''t exist **')
+        elif (len(args) < 2):
+            print('** instance id missing **')
         else:
             if args[0] in new_class:
                 models.storage.reload()
@@ -73,32 +75,31 @@ class hbnb(cmd.Cmd):
                         if args[1] in new_dict.keys():
                             print(new_dict[args[1]])
                             break
-            else:
-                print("** class doesn't exist **")
 
     def do_destroy(self, arg):
         '''Deletes an instance based on the class name and id,'''\
             '''saves to JSON file'''
-        new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
+        new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review'
                      'State', 'User']
         args = arg.split()
 
-        if len(args) == 0:
+        if (len(args) == 0):
             print('** class name is missing **')
+        elif args[0] not in new_class:
+            print('** class doesn''t exist **')
+        elif (len(args) < 2):
+            print('** instance id missing **')
         else:
             if args[0] in new_class:
                 models.storage.reload()
                 new_dict = models.storage.all()
-                if args[1] in new_dict.keys():
-                    if args[0] in str(new_dict[args[1]]):
-                        del new_dict[args[1]]
-                        models.storage.save()
-                    else:
-                        print('** no instance found **')
+                if args[1] not in new_dict:
+                    print('** not instance found **')
                 else:
-                    print('** instance id missing **')
-            else:
-                print('** class doesn''t exist **')
+                    if args[1] in new_dict.keys():
+                        if args[0] in str(new_dict[args[1]]):
+                            del new_dict[args[1]]
+                            models.storage.save()
 
     def do_all(self, arg):
         """Prints string representation of all instances based,"""\
