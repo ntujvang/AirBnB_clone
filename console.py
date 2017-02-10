@@ -135,12 +135,9 @@ class hbnb(cmd.Cmd):
             class_name = args[0]
             user_id = args[1]
             attribute_name = args[2]
-            attribute_value = args[3].replace('\"', '')
-            models.storage.reload()
-            new_dict = models.storage.all()
+            attribute_value = args[3]
             if class_name in new_class:
-                obj = new_dict[user_id]
-                obj.attribute_name = attribute_value
+                (self.obj[user_id]).__dict__[attribute_name] = attribute_value
                 models.storage.save()
             else:
                 print('** class doesn''t exist **')
