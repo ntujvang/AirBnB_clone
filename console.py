@@ -79,7 +79,7 @@ class hbnb(cmd.Cmd):
     def do_destroy(self, arg):
         '''Deletes an instance based on the class name and id,'''\
             '''saves to JSON file'''
-        new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review'
+        new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
                      'State', 'User']
         args = arg.split()
 
