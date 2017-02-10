@@ -11,9 +11,14 @@ class Review(BaseModel):
 
     Review contains three public attributes: 'place_id', 'user_id', 'text'.
     '''
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         '''This is the initialization method.
         '''
+        if type(args[0]) is dict:
+            super().__init__(args[0])
+        else:
+            super().__init__()
+
         self.place_id = ''
         self.user_id = ''
         self.text = ''

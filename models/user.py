@@ -16,7 +16,8 @@ class User(BaseModel):
         '''This is the initialization function.
         initializes User with class attributes set to empty strings.
         '''
-        super(User, self).__init__()
+        super().__init__()
+
         self.email = ''
         self.password = ''
         self.first_name = ''

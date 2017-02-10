@@ -12,8 +12,13 @@ class City(BaseModel):
 
     City contains two public attributes: 'state_id' and 'name'.
     '''
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         '''This is the initialization function.
         '''
+        if type(args[0]) is dict:
+            super().__init__(args[0])
+        else:
+            super().__init__()
+
         self.state_id = ''
         self.name = ''

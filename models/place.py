@@ -13,9 +13,14 @@ class Place(BaseModel):
     'description', 'number_rooms', 'number_bathrooms', 'max_guest',
     'price_by_night', 'number_rooms', 'latitude', 'longitude', 'amenities'
     '''
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         '''This is the initialization method.
         '''
+        if type(args[0]) is dict:
+            super().__init__(args[0])
+        else:
+            super().__init__()
+
         self.city_id = ''
         self.user_id = ''
         self.name = ''
