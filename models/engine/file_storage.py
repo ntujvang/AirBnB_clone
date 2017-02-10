@@ -55,6 +55,7 @@ class FileStorage:
         if os.path.isfile(FileStorage.__file_path) is True:
             with open(FileStorage.__file_path, 'r+', encoding='utf-8') as fn:
                 obj = json.load(fn)
+"""
             for key in obj.keys():
                 is_dict = obj[key]
                 is_class = is_dict['__class__']
@@ -72,3 +73,4 @@ class FileStorage:
                     FileStorage.__objects[key] = State(obj[key])
                 if 'User' in is_class:
                     FileStorage.__objects[key] = User(obj[key])
+"""
