@@ -14,19 +14,19 @@ class hbnb(cmd.Cmd):
     file = None  # maybe remove
 
     def do_quit(self, arg):
-        '''Quit command to exit the program'''
+        '''Quit command to exit the program.'''
         return True
 
     def do_EOF(self, arg):
-        '''Exits the program'''
+        '''Exits the program.'''
         return True
 
     def emptyline(self):
-        '''Prevents repeat of previous input'''
+        '''Prevents repeat of previous input.'''
         pass
 
     def do_create(self, arg):
-        '''Creates a new instance of BaseModel, save to JSON file'''
+        '''Creates a new instance of BaseModel, save to JSON file.'''
         args = arg.split()
         new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
                      'State', 'User']
@@ -52,8 +52,8 @@ class hbnb(cmd.Cmd):
                 print('{}'.format(new.id))
 
     def do_show(self, arg):
-        """Prints the string representation of an instance
-        based on the class name and id"""
+        """Prints the string representation of an instance""" \
+        """based on the class name and id."""
         new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
                      'State', 'User']
         args = arg.split()
@@ -78,7 +78,7 @@ class hbnb(cmd.Cmd):
 
     def do_destroy(self, arg):
         '''Deletes an instance based on the class name and id,'''\
-            '''saves to JSON file'''
+        '''saves to JSON file.'''
         new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
                      'State', 'User']
         args = arg.split()
@@ -103,7 +103,7 @@ class hbnb(cmd.Cmd):
 
     def do_all(self, arg):
         """Prints string representation of all instances based,"""\
-            """ or not, on the class name."""
+        """ or not, on the class name."""
         new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
                      'State', 'User']
         our_list = []
@@ -120,7 +120,7 @@ class hbnb(cmd.Cmd):
 
     def do_update(self, arg):
         '''Updates an instance based on the class name and id'''\
-            '''by adding or updating attribute, saves to JSON file'''
+        '''by adding or updating attribute, saves to JSON file.'''
         new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
                      'State', 'User']
         args = arg.split()
@@ -137,7 +137,14 @@ class hbnb(cmd.Cmd):
             class_name = args[0]
             user_id = args[1]
             attribute_name = args[2]
-            attribute_value = args[3]
+            attribute_value = ""
+            if (len(args) > 4):
+                for i in range(len(args) - 3):
+                    attribute_value += (args[i + 3].replace('\"', ''))
+                    if i < (len(args) - 4):
+                        attribute_value += " "
+            else:
+                attribute_value = args[3].replace('\"', '')
             if class_name in new_class:
                 (self.obj[user_id]).__dict__[attribute_name] = attribute_value
                 models.storage.save()
