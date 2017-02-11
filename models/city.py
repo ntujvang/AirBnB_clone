@@ -12,9 +12,10 @@ class City(BaseModel):
 
     City contains two public attributes: 'state_id' and 'name'.
     '''
+    state_id = ''
+    name = ''
+
     def __init__(self, *args, **kwargs):
         '''This is the initialization function.
         '''
         super().__init__(*args, **kwargs)
-        self.state_id = ''
-        self.name = ''

@@ -13,19 +13,20 @@ class Place(BaseModel):
     'description', 'number_rooms', 'number_bathrooms', 'max_guest',
     'price_by_night', 'number_rooms', 'latitude', 'longitude', 'amenities'
     '''
+    city_id = ''
+    user_id = ''
+    name = ''
+    description = ''
+    number_rooms = 0
+    number_bathrooms = 0
+    max_guest = 0
+    price_by_night = 0
+    number_rooms = 0
+    latitude = 0.0
+    longitude = 0.0
+    amenities = []
+
     def __init__(self, *args, **kwargs):
         '''This is the initialization method.
         '''
         super().__init__(*args, **kwargs)
-        self.city_id = ''
-        self.user_id = ''
-        self.name = ''
-        self.description = ''
-        self.number_rooms = 0
-        self.number_bathrooms = 0
-        self.max_guest = 0
-        self.price_by_night = 0
-        self.number_rooms = 0
-        self.latitude = 0.0
-        self.longitude = 0.0
-        self.amenities = []

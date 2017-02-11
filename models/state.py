@@ -12,8 +12,9 @@ class State(BaseModel):
 
     State contains one public attribute, 'name'.
     '''
+    name = ''
+
     def __init__(self, *args, **kwargs):
         '''This is the initialization function.
         '''
         super().__init__(*args, **kwargs)
-        self.name = ''

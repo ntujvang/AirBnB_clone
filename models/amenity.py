@@ -12,8 +12,9 @@ class Amenity(BaseModel):
 
     The class contains one public attribute, 'name'.
     '''
+    name = ''
+
     def __init__(self, *args, **kwargs):
         '''This is the initialization method.
         '''
         super().__init__(*args, **kwargs)
-        self.name = ''
