@@ -54,20 +54,20 @@ class FileStorage:
         if os.path.isfile(FileStorage.__file_path) is True:
             with open(FileStorage.__file_path, 'r+', encoding='utf-8') as fn:
                 obj = json.load(fn)
-            for key in obj.keys():
-                is_dict = obj[key]
-                is_class = is_dict['__class__']
-                if 'BaseModel' in is_class:
-                    FileStorage.__objects[key] = models.BaseModel(obj[key])
-                if 'Amenity' in is_class:
-                    FileStorage.__objects[key] = models.Amenity(obj[key])
-                if 'City' in is_class:
-                    FileStorage.__objects[key] = models.City(obj[key])
-                if 'Place' in is_class:
-                    FileStorage.__objects[key] = models.Place(obj[key])
-                if 'Review' in is_class:
-                    FileStorage.__objects[key] = models.Review(obj[key])
-                if 'State' in is_class:
-                    FileStorage.__objects[key] = models.State(obj[key])
-                if 'User' in is_class:
-                    FileStorage.__objects[key] = models.User(obj[key])
+                for key in obj.keys():
+                    is_dict = obj[key]
+                    is_class = is_dict['__class__']
+                    if 'BaseModel' in is_class:
+                        FileStorage.__objects[key] = models.BaseModel(obj[key])
+                    if 'Amenity' in is_class:
+                        FileStorage.__objects[key] = models.Amenity(obj[key])
+                    if 'City' in is_class:
+                        FileStorage.__objects[key] = models.City(obj[key])
+                    if 'Place' in is_class:
+                        FileStorage.__objects[key] = models.Place(obj[key])
+                    if 'Review' in is_class:
+                        FileStorage.__objects[key] = models.Review(obj[key])
+                    if 'State' in is_class:
+                        FileStorage.__objects[key] = models.State(obj[key])
+                    if 'User' in is_class:
+                        FileStorage.__objects[key] = models.User(obj[key])
