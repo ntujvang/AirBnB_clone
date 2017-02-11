@@ -53,7 +53,7 @@ class hbnb(cmd.Cmd):
 
     def do_show(self, arg):
         """Prints the string representation of an instance""" \
-        """based on the class name and id."""
+            """based on the class name and id."""
         new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
                      'State', 'User']
         args = arg.split()
@@ -78,7 +78,7 @@ class hbnb(cmd.Cmd):
 
     def do_destroy(self, arg):
         '''Deletes an instance based on the class name and id,'''\
-        '''saves to JSON file.'''
+            '''saves to JSON file.'''
         new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
                      'State', 'User']
         args = arg.split()
@@ -103,7 +103,7 @@ class hbnb(cmd.Cmd):
 
     def do_all(self, arg):
         """Prints string representation of all instances based,"""\
-        """ or not, on the class name."""
+            """ or not, on the class name."""
         new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
                      'State', 'User']
         our_list = []
@@ -120,7 +120,7 @@ class hbnb(cmd.Cmd):
 
     def do_update(self, arg):
         '''Updates an instance based on the class name and id'''\
-        '''by adding or updating attribute, saves to JSON file.'''
+            '''by adding or updating attribute, saves to JSON file.'''
         new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
                      'State', 'User']
         args = arg.split()
