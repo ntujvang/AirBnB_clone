@@ -1,17 +1,25 @@
 #!/usr/bin/python3
+"""
+This is the 'console' module.
+
+console contains the 'hbnb' class, which inherits from the 'cmd.Cmd' class.
+This contains the entry point for the command interpreter.
+"""
 import cmd
 import sys
 import models
-"""Console module for Holberton bnb data management
-"""
 
 
 class hbnb(cmd.Cmd):
-    """Class to create console
+    """This is the 'hbnb' class.
+
+    hbnb contains the variable 'prompt'. It also contains eight methods:
+    'quit', 'EOF', 'emptyLine', 'create', 'show', destroy',
+    'all', 'update'.
     """
     prompt = '(hbnb) '
     obj = models.storage.all()
-    file = None  # maybe remove
+    file = None
 
     def do_quit(self, arg):
         '''Quit command to exit the program.'''
@@ -52,8 +60,7 @@ class hbnb(cmd.Cmd):
                 print('{}'.format(new.id))
 
     def do_show(self, arg):
-        """Prints the string representation of an instance""" \
-            """based on the class name and id."""
+        '''Prints the string representation of an instance'''
         new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
                      'State', 'User']
         args = arg.split()
@@ -77,8 +84,7 @@ class hbnb(cmd.Cmd):
                             break
 
     def do_destroy(self, arg):
-        '''Deletes an instance based on the class name and id,'''\
-            '''saves to JSON file.'''
+        '''Deletes an instance based on the class name and id,'''
         new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
                      'State', 'User']
         args = arg.split()
@@ -102,8 +108,7 @@ class hbnb(cmd.Cmd):
                             models.storage.save()
 
     def do_all(self, arg):
-        """Prints string representation of all instances based,"""\
-            """ or not, on the class name."""
+        '''Prints string representation of all instances based on class'''
         new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
                      'State', 'User']
         our_list = []
@@ -119,8 +124,7 @@ class hbnb(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_update(self, arg):
-        '''Updates an instance based on the class name and id'''\
-            '''by adding or updating attribute, saves to JSON file.'''
+        '''Updates an instance by adding or updating attribute'''
         new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
                      'State', 'User']
         args = arg.split()
