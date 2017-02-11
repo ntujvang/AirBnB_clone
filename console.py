@@ -124,15 +124,18 @@ class hbnb(cmd.Cmd):
         new_class = ['BaseModel', 'Amenity', 'City', 'Place', 'Review',
                      'State', 'User']
         args = arg.split()
+        new_dict = models.storage.all()
 
         if len(args) == 0:
             print('** class name is missing **')
+        elif args[0] not in new_class:
+            print('** class doesn''t exist **')
         elif len(args) < 2:
             print('** instance id missing **')
-        elif len(args) < 4:
-            print('** value missing **')
-        elif args[1] not in self.obj:
+        elif args[1] not in new_dict:
             print('** no instance found **')
+        elif len(args) < 4 not in self.obj:
+            print('** value missing **')
         else:
             class_name = args[0]
             user_id = args[1]
@@ -148,8 +151,6 @@ class hbnb(cmd.Cmd):
             if class_name in new_class:
                 (self.obj[user_id]).__dict__[attribute_name] = attribute_value
                 models.storage.save()
-            else:
-                print('** class doesn''t exist **')
 
 if __name__ == '__main__':
     hbnb().cmdloop()
