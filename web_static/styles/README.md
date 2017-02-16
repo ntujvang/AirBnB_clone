@@ -1,0 +1,1 @@
+These files are all CSS files for AirBnB clone website

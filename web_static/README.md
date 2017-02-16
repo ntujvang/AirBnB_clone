@@ -1,0 +1,1 @@
+These are all HTML files of the AirBnB clone project for Holberton School
