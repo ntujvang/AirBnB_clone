@@ -46,7 +46,9 @@ def deploy():
     """
     This function calls both do_pack and do_deploy
     """
-    mypath = do_pack()
-    if not path:
+    try:
+        mypath = do_pack()
+        working = do_deploy(mypath)
+        return working
+    else:
         return False
-    return(do_deploy(mypath))
