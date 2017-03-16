@@ -12,7 +12,6 @@ def do_deploy(archive_path):
         file_name = archive_path[9:]
         notgz_tag = archive_path[9:-4]
         new_dir = ("/data/web_static/releases/" + notgz_tag)
-        run('sudo mkdir -p /tmp')
         put(archive_path, '/tmp')
         run('sudo mkdir -p {}'.format(new_dir))
         run('sudo tar -xzf /tmp/{} -C {}'.format(file_name, new_dir))
