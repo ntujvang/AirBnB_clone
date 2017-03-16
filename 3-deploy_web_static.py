@@ -50,5 +50,5 @@ def deploy():
         mypath = do_pack()
         working = do_deploy(mypath)
         return working
-    else:
+    except:
         return False
