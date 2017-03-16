@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # Script contains do_deploy, do_pack and deploy!!!!
 from fabric.api import *
+import time
 env.hosts = ['54.89.103.152', '54.91.31.60']
 
 
@@ -46,9 +47,8 @@ def deploy():
     """
     This function calls both do_pack and do_deploy
     """
-    try:
-        mypath = do_pack()
-        working = do_deploy(mypath)
-        return working
-    except:
+    mypath = do_pack()
+    if not mypath:
         return False
+    working = do_deploy(mypath)
+    return working
